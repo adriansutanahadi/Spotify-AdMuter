@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,8 @@ namespace Spotify_AdMuter
         private OAuthFetcher oauthFetcher;
         private CSRFFetcher csrfFetcher;
         private string statusUrl;
-        public string status;
+        public SpotifyStatus status;
+        public string status_json;
 
         public StatusFetcher()
         {
@@ -21,8 +23,13 @@ namespace Spotify_AdMuter
 
         public async Task UpdateStatus()
         {
+            if (oauthFetcher.oauth == null || csrfFetcher.csrf == null)
+            {
+                await UpdateTokens();
+            }
             statusUrl = WebHandler.getLocalSpotifyUrl("/remote/status.json" + "?oauth=" + oauthFetcher.oauth.t + "&csrf=" + csrfFetcher.csrf.token);
-            status = await WebHandler.FetchDataAsync(statusUrl);
+            status_json = await WebHandler.FetchDataAsync(statusUrl);
+            status = JsonConvert.DeserializeObject<SpotifyStatus>(status_json);
         }
         public async Task UpdateTokens()
         {

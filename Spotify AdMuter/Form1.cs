@@ -19,15 +19,29 @@ namespace Spotify_AdMuter
             InitializeComponent();
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             statusFetcher = new StatusFetcher();
-            await statusFetcher.UpdateTokens();
-            while (true)
+        }
+
+        private async void RefreshTimer_Tick(object sender, EventArgs e)
+        {
+            await statusFetcher.UpdateStatus();
+            if (checkBox1.Checked)
             {
-                await statusFetcher.UpdateStatus();
-                status.Text = statusFetcher.status;
-                await Task.Delay(250);
+                status.Text = statusFetcher.status_json;
+            }
+            else if (statusFetcher.status.isPrivateSession())
+            {
+                status.Text = "Private Session";
+            }
+            else if (statusFetcher.status.isAd())
+            {
+                status.Text = "Ad";
+            }
+            else
+            {
+                status.Text = statusFetcher.status.track.artist_resource.name + "-" + statusFetcher.status.track.track_resource.name;
             }
         }
     }

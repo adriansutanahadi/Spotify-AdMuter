@@ -6,26 +6,49 @@ using System.Threading.Tasks;
 
 namespace Spotify_AdMuter
 {
-    public class Info
+    public class Track
     {
-        public int num_results;
-        public int limit;
-        public int offset;
-        public string query;
-        public string type;
-        public int page;
+        public TrackResource track_resource;
+        public ArtistResource artist_resource;
+        public AlbumResource album_resource;
+        public int length;
+        public string track_type;
     }
 
-    public class Artist
+    public class TrackResource
     {
-        public string href;
         public string name;
-        public float popularity;
     }
 
+    public class ArtistResource
+    {
+        public string name;
+    }
+
+    public class AlbumResource
+    {
+        public string name;
+    }
+
+    public class OpenGraphState
+    {
+        public bool private_session;
+    }
     public class SpotifyStatus
     {
-        public Info info;
-        public IList<Artist> artists;
+        public bool playing;
+        public Track track;
+        public double playing_position;
+        public OpenGraphState open_graph_state; 
+
+        public bool isPrivateSession()
+        {
+            return open_graph_state.private_session;
+        }
+
+        public bool isAd()
+        {
+            return track.track_type == "ad";
+        }
     }
 }
