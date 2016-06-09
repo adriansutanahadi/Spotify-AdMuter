@@ -21,13 +21,13 @@ namespace Spotify_AdMuter
         static void Main()
         {
             bool createdNew = true;
-            using (Mutex mutex = new Mutex(true, "MyApplicationName", out createdNew))
+            using (Mutex mutex = new Mutex(true, "Spotify AdMuter", out createdNew))
             {
                 if (createdNew)
                 {
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new Form1());
+                    Application.Run(new Main());
                 }
                 else
                 {

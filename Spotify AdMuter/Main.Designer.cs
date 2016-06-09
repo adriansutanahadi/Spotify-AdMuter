@@ -1,6 +1,6 @@
 ﻿namespace Spotify_AdMuter
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.status = new System.Windows.Forms.Label();
+            this.spotifyStatus = new System.Windows.Forms.Label();
             this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.showJSON = new System.Windows.Forms.CheckBox();
+            this.muterStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // status
+            // spotifyStatus
             // 
-            this.status.AutoSize = true;
-            this.status.Location = new System.Drawing.Point(12, 33);
-            this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(43, 13);
-            this.status.TabIndex = 0;
-            this.status.Text = "Paused";
+            this.spotifyStatus.AutoSize = true;
+            this.spotifyStatus.Location = new System.Drawing.Point(12, 69);
+            this.spotifyStatus.Name = "spotifyStatus";
+            this.spotifyStatus.Size = new System.Drawing.Size(0, 13);
+            this.spotifyStatus.TabIndex = 0;
             // 
             // RefreshTimer
             // 
@@ -49,25 +49,34 @@
             this.RefreshTimer.Interval = 500;
             this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
             // 
-            // checkBox1
+            // showJSON
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(13, 13);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.showJSON.AutoSize = true;
+            this.showJSON.Location = new System.Drawing.Point(12, 12);
+            this.showJSON.Name = "showJSON";
+            this.showJSON.Size = new System.Drawing.Size(79, 17);
+            this.showJSON.TabIndex = 1;
+            this.showJSON.Text = "showJSON";
+            this.showJSON.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // muterStatus
+            // 
+            this.muterStatus.AutoSize = true;
+            this.muterStatus.Location = new System.Drawing.Point(12, 42);
+            this.muterStatus.Name = "muterStatus";
+            this.muterStatus.Size = new System.Drawing.Size(0, 13);
+            this.muterStatus.TabIndex = 2;
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.status);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Controls.Add(this.muterStatus);
+            this.Controls.Add(this.showJSON);
+            this.Controls.Add(this.spotifyStatus);
+            this.Name = "Main";
+            this.Text = "Spotify AdMuter";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -76,9 +85,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label status;
+        private System.Windows.Forms.Label spotifyStatus;
         private System.Windows.Forms.Timer RefreshTimer;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox showJSON;
+        private System.Windows.Forms.Label muterStatus;
     }
 }
 

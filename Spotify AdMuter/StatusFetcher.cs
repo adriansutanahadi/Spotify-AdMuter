@@ -27,10 +27,18 @@ namespace Spotify_AdMuter
             {
                 await UpdateTokens();
             }
+
             statusUrl = WebHandler.getLocalSpotifyUrl("/remote/status.json" + "?oauth=" + oauthFetcher.oauth.t + "&csrf=" + csrfFetcher.csrf.token);
             status_json = await WebHandler.FetchDataAsync(statusUrl);
             status = JsonConvert.DeserializeObject<SpotifyStatus>(status_json);
+
+            // error type 4102 is invalid oauth, 4107 is invalid csrf
+            if (status.isError() && (status.error.type == "4102" || status.error.type == "4107"))
+            {
+                await UpdateTokens();
+            }
         }
+
         public async Task UpdateTokens()
         {
             await oauthFetcher.UpdateOAuth();
